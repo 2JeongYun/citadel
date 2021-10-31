@@ -64,6 +64,11 @@ public class ApiCaller {
         return JsonUtil.convertJsonToObject(json, returnType);
     }
 
+    public <T> T call(String url, MethodType type, Class<T> returnType) {
+        String json = call(url, type, new HashMap<>());
+        return JsonUtil.convertJsonToObject(json, returnType);
+    }
+
     public String call(String url, MethodType type, Map<String, String> headers) {
         return call(url, type, headers, (String) null);
     }
