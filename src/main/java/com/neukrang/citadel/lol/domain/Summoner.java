@@ -7,6 +7,7 @@ import lombok.Getter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Summoner {
 
+    private String id;
     private String puuid;
     private String name;
     private Long summonerLevel;
