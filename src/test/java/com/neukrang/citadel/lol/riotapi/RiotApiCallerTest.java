@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @SpringBootTest
 public class RiotApiCallerTest {
@@ -17,8 +17,8 @@ public class RiotApiCallerTest {
     ApiCaller riotApiCaller;
 
     @Test
-    public void getSummoner() throws UnsupportedEncodingException {
-        String urlEncodedName = URLEncoder.encode("고급 참치캔", "UTF-8");
+    public void getSummoner() {
+        String urlEncodedName = URLEncoder.encode("고급 참치캔", StandardCharsets.UTF_8);
 
         String result = riotApiCaller.call("/lol/summoner/v4/summoners/by-name/" + urlEncodedName,
                 MethodType.GET);
