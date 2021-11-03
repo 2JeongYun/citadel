@@ -1,4 +1,4 @@
-package com.neukrang.citadel.learningtest.jackson;
+package com.neukrang.citadel.learningtest.jackson.objectmapper;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class ObjectMapperTest {
 
-    String path = "./src/test/java/com/neukrang/citadel/learningtest/jackson";
+    String path = "./src/test/java/com/neukrang/citadel/learningtest/jackson/objectmapper";
     ObjectMapper om = new ObjectMapper();
 
     @Test

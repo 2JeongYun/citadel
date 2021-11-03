@@ -1,4 +1,4 @@
-package com.neukrang.citadel.learningtest.jackson;
+package com.neukrang.citadel.learningtest.jackson.objectmapper;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
