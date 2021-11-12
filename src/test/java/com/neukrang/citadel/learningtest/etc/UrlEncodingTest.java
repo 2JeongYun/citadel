@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-public class UrlEncoding {
+public class UrlEncodingTest {
 
     @Test
     public void Url_인코딩() {
