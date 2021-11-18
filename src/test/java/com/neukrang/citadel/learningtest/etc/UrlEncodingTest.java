@@ -12,7 +12,8 @@ public class UrlEncodingTest {
     public void Url_인코딩() {
         String target = "고급 참치캔";
         String result = URLEncoder.encode(target, StandardCharsets.UTF_8);
+        result = result.replaceAll("\\+", "%2B");
 
-        Assertions.assertThat(result).isEqualTo("%EA%B3%A0%EA%B8%89+%EC%B0%B8%EC%B9%98%EC%BA%94");
+        Assertions.assertThat(result).isEqualTo("%EA%B3%A0%EA%B8%89%2B%EC%B0%B8%EC%B9%98%EC%BA%94");
     }
 }
