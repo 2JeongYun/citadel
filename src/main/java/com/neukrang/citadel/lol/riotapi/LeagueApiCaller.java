@@ -1,6 +1,7 @@
 package com.neukrang.citadel.lol.riotapi;
 
-import com.neukrang.citadel.lol.domain.LeagueInfo;
+import com.neukrang.citadel.lol.domain.league.LeagueInfo;
+import com.neukrang.citadel.lol.domain.summoner.Summoner;
 import com.neukrang.citadel.util.ApiCaller;
 import com.neukrang.citadel.util.MethodType;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +19,12 @@ public class LeagueApiCaller {
     private final ApiCaller riotApiCaller;
     private final String baseUrl = "/lol/league/v4";
 
-    public List<LeagueInfo> getLeagueInfoList(String encryptedSummonerId) {
-        String url = baseUrl + "/entries/by-summoner/" + encryptedSummonerId;
+    public List<LeagueInfo> getLeagueInfoList(Summoner summoner) {
+        String url = baseUrl + "/entries/by-summoner/" + summoner.getId();
 
         LeagueInfo[] leagueInfoArr = riotApiCaller.call(url, MethodType.GET, LeagueInfo[].class);
+        Arrays.stream(leagueInfoArr)
+                .forEach(leagueInfo -> leagueInfo.setSummoner(summoner));
 
         return Arrays.asList(leagueInfoArr);
     }

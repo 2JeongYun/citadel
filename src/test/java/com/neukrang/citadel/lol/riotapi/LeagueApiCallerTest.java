@@ -1,8 +1,9 @@
 package com.neukrang.citadel.lol.riotapi;
 
-import com.neukrang.citadel.lol.domain.LeagueInfo;
 import com.neukrang.citadel.lol.domain.QueueType;
 import com.neukrang.citadel.lol.domain.Tier;
+import com.neukrang.citadel.lol.domain.league.LeagueInfo;
+import com.neukrang.citadel.lol.domain.summoner.Summoner;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,14 +16,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LeagueApiCallerTest {
 
     @Autowired
-    LeagueApiCaller leagueApiCaller;
+    SummonerApiCaller summonerApiCaller;
 
-    // 헝 꾸
-    final String summonerId = "G4t3d-nL3amIPAVm8uqyAotV54g54U7NMdY6rQ8WLwZCnw";
+    @Autowired
+    LeagueApiCaller leagueApiCaller;
 
     @Test
     void getLeagueInfoList() {
-        List<LeagueInfo> leagueInfoList = leagueApiCaller.getLeagueInfoList(summonerId);
+        Summoner summoner = summonerApiCaller.getSummonerByName("헝 꾸");
+        List<LeagueInfo> leagueInfoList = leagueApiCaller.getLeagueInfoList(summoner);
         LeagueInfo flexInfo = null, soloInfo = null;
         if (leagueInfoList.get(0).getQueueType() == QueueType.FLEX) {
             flexInfo = leagueInfoList.get(0);
