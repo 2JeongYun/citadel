@@ -1,6 +1,7 @@
 package com.neukrang.citadel.util;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -8,6 +9,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @RequiredArgsConstructor
 public class ApiCaller {
 
@@ -42,7 +44,10 @@ public class ApiCaller {
                 while ((line = br.readLine()) != null) {
                     sb.append(line);
                 }
-                return sb.toString();
+
+                String responseMsg = sb.toString();
+                log.debug(responseMsg);
+                return responseMsg;
             } catch (FileNotFoundException e) {
                 System.out.println("ERROR: " + conn.getResponseCode());
                 return null;
