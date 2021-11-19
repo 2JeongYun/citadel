@@ -1,7 +1,9 @@
 package com.neukrang.citadel.lol.domain.summoner;
 
+import java.util.Optional;
+
 public interface SummonerRepository {
 
     String save(Summoner summoner);
-    Summoner find(String puuid);
+    Optional<Summoner> find(String puuid);
 }

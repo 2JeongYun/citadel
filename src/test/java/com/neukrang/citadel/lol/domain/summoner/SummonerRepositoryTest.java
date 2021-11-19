@@ -22,7 +22,7 @@ class SummonerRepositoryTest {
         Summoner summoner = summonerApiCaller.getSummonerByName("고급 참치캔");
 
         String puuid = summonerRepository.save(summoner);
-        Summoner foundedSummoner = summonerRepository.find(puuid);
+        Summoner foundedSummoner = summonerRepository.find(puuid).get();
 
         Assertions.assertThat(foundedSummoner)
                 .usingRecursiveComparison()

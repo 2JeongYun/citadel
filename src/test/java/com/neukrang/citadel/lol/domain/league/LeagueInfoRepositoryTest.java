@@ -44,7 +44,7 @@ class LeagueInfoRepositoryTest {
 
         for (int i = 0; i < infoIdList.size(); i++) {
             Long id = infoIdList.get(i);
-            LeagueInfo leagueInfo = leagueInfoRepository.find(id);
+            LeagueInfo leagueInfo = leagueInfoRepository.find(id).get();
             Assertions.assertThat(leagueInfo)
                     .usingRecursiveComparison()
                     .isEqualTo(leagueInfoList.get(i));

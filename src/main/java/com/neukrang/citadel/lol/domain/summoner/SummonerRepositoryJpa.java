@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Optional;
 
 @Repository
 public class SummonerRepositoryJpa implements SummonerRepository {
@@ -18,7 +19,7 @@ public class SummonerRepositoryJpa implements SummonerRepository {
     }
 
     @Override
-    public Summoner find(String puuid) {
-        return em.find(Summoner.class, puuid);
+    public Optional<Summoner> find(String puuid) {
+        return Optional.ofNullable(em.find(Summoner.class, puuid));
     }
 }

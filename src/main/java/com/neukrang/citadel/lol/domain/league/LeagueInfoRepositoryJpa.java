@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Optional;
 
 @Repository
 public class LeagueInfoRepositoryJpa implements LeagueInfoRepository {
@@ -18,7 +19,7 @@ public class LeagueInfoRepositoryJpa implements LeagueInfoRepository {
     }
 
     @Override
-    public LeagueInfo find(Long id) {
-        return em.find(LeagueInfo.class, id);
+    public Optional<LeagueInfo> find(Long id) {
+        return Optional.ofNullable(em.find(LeagueInfo.class, id));
     }
 }
