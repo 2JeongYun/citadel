@@ -1,5 +1,6 @@
 package com.neukrang.citadel.lol.riotapi;
 
+import com.neukrang.citadel.lol.domain.QueueType;
 import com.neukrang.citadel.lol.domain.league.LeagueInfo;
 import com.neukrang.citadel.lol.domain.summoner.Summoner;
 import com.neukrang.citadel.util.ApiCaller;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -23,9 +25,11 @@ public class LeagueApiCaller {
         String url = baseUrl + "/entries/by-summoner/" + summoner.getId();
 
         LeagueInfo[] leagueInfoArr = riotApiCaller.call(url, MethodType.GET, LeagueInfo[].class);
-        Arrays.stream(leagueInfoArr)
-                .forEach(leagueInfo -> leagueInfo.setSummoner(summoner));
+        List<LeagueInfo> leagueInfoList = Arrays.stream(leagueInfoArr)
+                .filter(leagueInfo -> leagueInfo.getQueueType() != QueueType.UNKNOWN)
+                .collect(Collectors.toList());
 
-        return Arrays.asList(leagueInfoArr);
+        leagueInfoList.stream().forEach(leagueInfo -> leagueInfo.setSummoner(summoner));
+        return leagueInfoList;
     }
 }

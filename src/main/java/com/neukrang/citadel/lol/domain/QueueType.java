@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum QueueType {
 
-    FLEX("RANKED_FLEX_SR"), SOLO("RANKED_SOLO_5x5");
+    FLEX("RANKED_FLEX_SR"), SOLO("RANKED_SOLO_5x5"), UNKNOWN("UNKNOWN");
 
     private final String riotQueueTypeValue;
 
@@ -16,6 +16,6 @@ public enum QueueType {
         return Arrays.stream(values())
                 .filter(type -> type.riotQueueTypeValue.equals(riotQueueTypeValue))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("QueueType을 찾을 수 없습니다."));
+                .orElse(UNKNOWN);
     }
 }
