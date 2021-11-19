@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static com.neukrang.citadel.learningtest.jackson.testutil.TestUtil.fileToString;
+import static com.neukrang.citadel.TestUtil.fileToString;
 
 public class ObjectMapperTest {
 

@@ -1,4 +1,4 @@
-package com.neukrang.citadel.learningtest.jackson.testutil;
+package com.neukrang.citadel;
 
 import java.io.BufferedReader;
 import java.io.File;

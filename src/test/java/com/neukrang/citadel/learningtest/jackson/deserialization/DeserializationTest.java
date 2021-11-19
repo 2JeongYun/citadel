@@ -2,7 +2,7 @@ package com.neukrang.citadel.learningtest.jackson.deserialization;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.neukrang.citadel.learningtest.jackson.testutil.TestUtil;
+import com.neukrang.citadel.TestUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
