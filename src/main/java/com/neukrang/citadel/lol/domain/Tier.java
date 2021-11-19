@@ -1,5 +1,8 @@
 package com.neukrang.citadel.lol.domain;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 public enum Tier {
 
     UNRANK(10),
@@ -21,5 +24,11 @@ public enum Tier {
 
     public int getNumber() {
         return number;
+    }
+
+    public static Optional<Tier> findByNumber(int number) {
+        return Arrays.stream(values())
+                .filter(tier -> tier.getNumber() == number)
+                .findFirst();
     }
 }
