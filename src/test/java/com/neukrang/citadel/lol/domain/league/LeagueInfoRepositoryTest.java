@@ -31,7 +31,7 @@ class LeagueInfoRepositoryTest {
     @Test
     @Transactional
     public void saveLeagueInfo() {
-        Summoner summoner = summonerApiCaller.getSummonerByName("헝 꾸");
+        Summoner summoner = summonerApiCaller.getSummonerByName("헝 꾸").get();
         summonerRepository.save(summoner);
 
         List<LeagueInfo> leagueInfoList = leagueApiCaller.getLeagueInfoList(summoner);

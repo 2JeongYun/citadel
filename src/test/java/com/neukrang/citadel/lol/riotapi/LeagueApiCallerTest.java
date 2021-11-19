@@ -23,7 +23,7 @@ class LeagueApiCallerTest {
 
     @Test
     void getLeagueInfoList() {
-        Summoner summoner = summonerApiCaller.getSummonerByName("헝 꾸");
+        Summoner summoner = summonerApiCaller.getSummonerByName("헝 꾸").get();
         List<LeagueInfo> leagueInfoList = leagueApiCaller.getLeagueInfoList(summoner);
         LeagueInfo flexInfo = null, soloInfo = null;
         if (leagueInfoList.get(0).getQueueType() == QueueType.FLEX) {

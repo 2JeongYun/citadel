@@ -16,7 +16,7 @@ class SummonerApiCallerTest {
     void getSummonerByName() {
         String name = "고급 참치캔";
 
-        Summoner result = summonerApiCaller.getSummonerByName(name);
+        Summoner result = summonerApiCaller.getSummonerByName(name).get();
 
         Assertions.assertThat(result.getName()).isEqualTo("고급 참치캔");
     }
