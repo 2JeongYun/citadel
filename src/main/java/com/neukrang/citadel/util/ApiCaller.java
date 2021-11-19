@@ -35,7 +35,6 @@ public class ApiCaller {
                     bw.write(reqMsg);
                     bw.flush();
                 }
-                //System.out.println(reqMsg);
             }
 
             try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
@@ -49,7 +48,7 @@ public class ApiCaller {
                 log.debug(responseMsg);
                 return responseMsg;
             } catch (FileNotFoundException e) {
-                System.out.println("ERROR: " + conn.getResponseCode());
+                log.error("ERROR: " + conn.getResponseCode());
                 return null;
             }
         } catch (Exception e) {
