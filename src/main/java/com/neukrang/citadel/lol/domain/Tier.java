@@ -2,6 +2,7 @@ package com.neukrang.citadel.lol.domain;
 
 public enum Tier {
 
+    UNRANK(10),
     IRON(9),
     BRONZE(8),
     SILVER(7),
@@ -12,13 +13,13 @@ public enum Tier {
     GRANDMASTER(2),
     CHALLENGER(1);
 
-    private final int order;
+    private final int number;
 
-    Tier(int order) {
-        this.order = order;
+    Tier(int number) {
+        this.number = number;
     }
 
-    public int getOrder() {
-        return order;
+    public int getNumber() {
+        return number;
     }
 }
