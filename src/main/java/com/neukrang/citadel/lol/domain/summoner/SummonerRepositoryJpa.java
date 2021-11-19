@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.Optional;
 
 @Repository
@@ -19,7 +20,16 @@ public class SummonerRepositoryJpa implements SummonerRepository {
     }
 
     @Override
-    public Optional<Summoner> find(String puuid) {
+    public Optional<Summoner> findByPuuid(String puuid) {
         return Optional.ofNullable(em.find(Summoner.class, puuid));
+    }
+
+    @Override
+    public Optional<Summoner> findByName(String name) {
+        String jpql = "select s from Summoner s where s.name = :name";
+        TypedQuery<Summoner> query = em.createQuery(jpql, Summoner.class);
+        query.setParameter("name", name);
+
+        return query.getResultStream().findFirst();
     }
 }
