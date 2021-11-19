@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class ResponseTest {
+class ApiResponseTest {
 
     ObjectMapper om = new ObjectMapper();
 
@@ -13,7 +13,7 @@ class ResponseTest {
     public void success() throws JsonProcessingException {
         TestObj testObj = new TestObj();
 
-        String json = om.writeValueAsString(Response.success(testObj));
+        String json = om.writeValueAsString(ApiResponse.success(testObj));
 
         Assertions.assertThat(json).contains("\"str\":\"Test\"");
         Assertions.assertThat(json).contains("\"num\":10");
@@ -23,7 +23,7 @@ class ResponseTest {
 
     @Test
     public void fail() throws JsonProcessingException {
-        String json = om.writeValueAsString(Response.fail("test fail"));
+        String json = om.writeValueAsString(ApiResponse.fail("test fail"));
 
         Assertions.assertThat(json).doesNotContain("\"str\":\"Test\"");
         Assertions.assertThat(json).doesNotContain("\"num\":10");
