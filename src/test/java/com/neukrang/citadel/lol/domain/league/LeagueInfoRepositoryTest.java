@@ -1,16 +1,17 @@
 package com.neukrang.citadel.lol.domain.league;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.neukrang.citadel.TestUtil;
 import com.neukrang.citadel.lol.domain.summoner.Summoner;
 import com.neukrang.citadel.lol.domain.summoner.SummonerRepository;
 import com.neukrang.citadel.lol.riotapi.LeagueApiCaller;
-import com.neukrang.citadel.lol.riotapi.SummonerApiCaller;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
@@ -23,31 +24,25 @@ class LeagueInfoRepositoryTest {
     LeagueInfoRepository leagueInfoRepository;
 
     @Autowired
-    SummonerApiCaller summonerApiCaller;
-
-    @Autowired
     SummonerRepository summonerRepository;
+
+    ObjectMapper om = new ObjectMapper();
 
     @Test
     @Transactional
-    public void saveLeagueInfo() {
-        Summoner summoner = summonerApiCaller.getSummonerByName("헝 꾸").get();
+    public void saveLeagueInfo() throws JsonProcessingException {
+        String json = TestUtil.fileToString("./src/test/java/com/neukrang/citadel/lol/SummonerTestJson.txt");
+        Summoner summoner = om.readValue(json, Summoner.class);
         summonerRepository.save(summoner);
 
         List<LeagueInfo> leagueInfoList = leagueApiCaller.getLeagueInfoList(summoner);
-        List<Long> infoIdList = new ArrayList<>();
 
-        for (LeagueInfo leagueInfo : leagueInfoList) {
-            Long id = leagueInfoRepository.save(leagueInfo);
-            infoIdList.add(id);
-        }
+        leagueInfoList.stream()
+                .forEach(leagueInfo -> leagueInfoRepository.save(leagueInfo));
 
-        for (int i = 0; i < infoIdList.size(); i++) {
-            Long id = infoIdList.get(i);
-            LeagueInfo leagueInfo = leagueInfoRepository.find(id).get();
-            Assertions.assertThat(leagueInfo)
-                    .usingRecursiveComparison()
-                    .isEqualTo(leagueInfoList.get(i));
-        }
+        List<LeagueInfo> foundedLeagueInfoList =
+                leagueInfoRepository.findBySummoner(summoner);
+        Assertions.assertThat(foundedLeagueInfoList)
+                .containsAll(leagueInfoList);
     }
 }

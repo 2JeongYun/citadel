@@ -1,9 +1,11 @@
 package com.neukrang.citadel.lol.domain.league;
 
-import java.util.Optional;
+import com.neukrang.citadel.lol.domain.summoner.Summoner;
+
+import java.util.List;
 
 public interface LeagueInfoRepository {
 
     Long save(LeagueInfo leagueInfo);
-    Optional<LeagueInfo> find(Long id);
+    List<LeagueInfo> findBySummoner(Summoner summoner);
 }
