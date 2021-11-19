@@ -3,7 +3,7 @@ package com.neukrang.citadel.learningtest.jackson.serialization;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class TestObject {
+public class SimpleValueObject {
 
     String field1;
     String field2;

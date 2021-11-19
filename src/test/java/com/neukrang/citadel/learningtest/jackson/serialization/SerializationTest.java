@@ -10,17 +10,31 @@ public class SerializationTest {
     ObjectMapper om = new ObjectMapper();
 
     @Test
-    public void 직렬화_필드명_변경() throws JsonProcessingException {
-        TestObject testObject = new TestObject();
-        testObject.setField1("필드1");
-        testObject.setField2("필드2");
+    public void 직렬화_테스트() throws JsonProcessingException {
+        SimpleValueObject simpleValueObject = new SimpleValueObject();
+        simpleValueObject.setField1("필드1");
+        simpleValueObject.setField2("필드2");
 
-        String resultJson = om.writeValueAsString(testObject);
+        String json = om.writeValueAsString(simpleValueObject);
 
-        System.out.println(resultJson);
+        System.out.println(json);
 
-        Assertions.assertThat(resultJson).contains("\"fieldOne\":\"필드1\"");
-        Assertions.assertThat(resultJson).contains("\"field2\":\"필드2\"");
-        Assertions.assertThat(resultJson).doesNotContain("\"field1\":\"필드1\"");
+        Assertions.assertThat(json).contains("\"fieldOne\":\"필드1\"");
+        Assertions.assertThat(json).contains("\"field2\":\"필드2\"");
+        Assertions.assertThat(json).doesNotContain("\"field1\":\"필드1\"");
+    }
+
+    @Test
+    public void null_필드명_직렬화() throws JsonProcessingException {
+        NullPropertyObject nullPropertyObject = new NullPropertyObject();
+
+        String json = om.writeValueAsString(nullPropertyObject);
+
+        System.out.println(json);
+
+        Assertions.assertThat(json).contains("\"nullStr\":null");
+        Assertions.assertThat(json).doesNotContain("\"notNullStr\":null");
+        Assertions.assertThat(json).contains("\"nullLong\":null");
+        Assertions.assertThat(json).doesNotContain("\"notNullLong\":null");
     }
 }
