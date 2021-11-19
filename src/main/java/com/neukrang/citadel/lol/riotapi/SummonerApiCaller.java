@@ -24,9 +24,12 @@ public class SummonerApiCaller {
 
         name = URLEncoder.encode(name, StandardCharsets.UTF_8);
 
-        Optional<Summoner> summoner =
-                Optional.ofNullable(riotApiCaller.call(url + name, MethodType.GET, Summoner.class));
-
-        return summoner;
+        try {
+            Optional<Summoner> summoner =
+                    Optional.ofNullable(riotApiCaller.call(url + name, MethodType.GET, Summoner.class));
+            return summoner;
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 }
