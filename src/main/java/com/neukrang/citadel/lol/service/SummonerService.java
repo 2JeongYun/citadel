@@ -22,16 +22,18 @@ public class SummonerService {
         if (summoner.isPresent())
             return summoner.get();
 
-        summoner = summonerApiCaller.getSummonerByName(name);
-        if (summoner.isPresent()) {
-            save(summoner.get());
+        summoner = updateSummonerByRiot(name);
+        if (summoner.isPresent())
             return summoner.get();
-        } else {
-            throw new IllegalArgumentException(name + " 소환사를 찾을 수 없습니다.");
-        }
+
+        throw new IllegalArgumentException(name + " 소환사를 찾을 수 없습니다.");
     }
 
-    public void save(Summoner summoner) {
-        summonerRepository.save(summoner);
+    @Transactional
+    public Optional<Summoner> updateSummonerByRiot(String name) {
+        Optional<Summoner> summoner = summonerApiCaller.getSummonerByName(name);
+        if (summoner.isPresent())
+            summonerRepository.save(summoner.get());
+        return summoner;
     }
 }

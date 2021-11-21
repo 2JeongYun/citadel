@@ -23,7 +23,13 @@ public class LeagueInfoService {
         if (leagueInfoList.size() > 0)
             return leagueInfoList;
 
-        leagueInfoList = leagueApiCaller.getLeagueInfoList(summoner);
+        leagueInfoList = updateLeagueInfoByRiot(summoner);
+        return leagueInfoList;
+    }
+
+    @Transactional
+    public List<LeagueInfo> updateLeagueInfoByRiot(Summoner summoner) {
+        List<LeagueInfo> leagueInfoList = leagueApiCaller.getLeagueInfoList(summoner);
         leagueInfoList.stream()
                 .forEach(leagueInfo -> leagueInfoRepository.save(leagueInfo));
         return leagueInfoList;
