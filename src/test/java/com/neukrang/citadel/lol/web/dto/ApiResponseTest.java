@@ -2,6 +2,7 @@ package com.neukrang.citadel.lol.web.dto;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.neukrang.citadel.util.ApiResponse;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

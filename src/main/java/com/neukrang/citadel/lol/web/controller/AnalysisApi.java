@@ -1,7 +1,7 @@
 package com.neukrang.citadel.lol.web.controller;
 
 import com.neukrang.citadel.lol.service.AnalysisService;
-import com.neukrang.citadel.lol.web.dto.ApiResponse;
+import com.neukrang.citadel.util.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
