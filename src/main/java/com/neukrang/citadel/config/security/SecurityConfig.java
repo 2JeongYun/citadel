@@ -1,5 +1,8 @@
 package com.neukrang.citadel.config.security;
 
+import com.neukrang.citadel.config.security.apikey.ApiKeyAuthFilter;
+import com.neukrang.citadel.config.security.apikey.ApiKeyAuthManager;
+import com.neukrang.citadel.config.security.apikey.ApiKeyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,14 +11,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 
-import javax.sql.DataSource;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private DataSource dataSource;
+    private ApiKeyService apiKeyService;
 
     @Bean
     public ApiKeyAuthFilter apiKeyAuthFilter() {
@@ -27,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public ApiKeyAuthManager apiKeyAuthManager() {
-        return new ApiKeyAuthManager(dataSource);
+        return new ApiKeyAuthManager(apiKeyService);
     }
 
     @Bean
@@ -44,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                 .authorizeRequests()
+                    .antMatchers("/api/v1/apikey/**").anonymous()
                     .antMatchers("/**").authenticated()
                     .and()
                 .exceptionHandling()

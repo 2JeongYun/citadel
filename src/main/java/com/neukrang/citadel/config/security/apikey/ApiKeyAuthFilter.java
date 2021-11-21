@@ -1,4 +1,4 @@
-package com.neukrang.citadel.config.security;
+package com.neukrang.citadel.config.security.apikey;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;

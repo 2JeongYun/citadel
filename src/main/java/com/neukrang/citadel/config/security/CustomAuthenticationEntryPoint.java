@@ -1,7 +1,7 @@
 package com.neukrang.citadel.config.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.neukrang.citadel.lol.web.dto.ApiResponse;
+import com.neukrang.citadel.util.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
