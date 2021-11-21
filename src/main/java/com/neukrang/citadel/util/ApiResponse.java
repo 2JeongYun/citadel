@@ -1,4 +1,4 @@
-package com.neukrang.citadel.lol.web.dto;
+package com.neukrang.citadel.util;
 
 import lombok.Getter;
 
