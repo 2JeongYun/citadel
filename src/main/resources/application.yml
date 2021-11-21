@@ -1,0 +1,26 @@
+spring:
+  profiles:
+    active: local
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+
+  h2:
+    console:
+      enabled: true
+
+server:
+  host: http://localhost:8080
+
+mail:
+  sender: leejeongyun828@gmail.com
+
+logging.level:
+  com: debug
+  org.hibernate.SQL: debug
+
+---
