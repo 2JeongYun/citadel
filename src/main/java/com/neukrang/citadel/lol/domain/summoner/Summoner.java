@@ -1,6 +1,7 @@
 package com.neukrang.citadel.lol.domain.summoner;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.neukrang.citadel.util.BaseTimeEntity;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -11,7 +12,7 @@ import javax.persistence.Id;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @ToString
-public class Summoner {
+public class Summoner extends BaseTimeEntity {
 
     @Id
     private String puuid;
