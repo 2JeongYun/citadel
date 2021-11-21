@@ -13,4 +13,8 @@ public class BaseTimeEntity {
 
     @LastModifiedDate
     private LocalDateTime modifiedDate;
+
+    public boolean needToUpdate(int updatePeriod) {
+        return LocalDateTime.now().isAfter(modifiedDate.plusDays(updatePeriod));
+    }
 }
