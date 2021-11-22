@@ -15,7 +15,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-class SummonerServiceTest {
+class SummonerServiceUnitTest {
 
     ObjectMapper om = new ObjectMapper();
     SummonerRepository summonerRepository = mock(SummonerRepository.class);

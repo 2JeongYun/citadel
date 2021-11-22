@@ -14,9 +14,9 @@ public class SummonerRepositoryJpa implements SummonerRepository {
     EntityManager em;
 
     @Override
-    public String save(Summoner summoner) {
+    public Summoner save(Summoner summoner) {
         em.persist(summoner);
-        return summoner.getPuuid();
+        return summoner;
     }
 
     @Override
@@ -31,5 +31,10 @@ public class SummonerRepositoryJpa implements SummonerRepository {
         query.setParameter("name", name);
 
         return query.getResultStream().findFirst();
+    }
+
+    @Override
+    public void remove(Summoner summoner) {
+        em.remove(summoner);
     }
 }

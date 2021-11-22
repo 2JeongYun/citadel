@@ -21,7 +21,7 @@ class SummonerRepositoryTest {
     public void saveSummoner() {
         Summoner summoner = summonerApiCaller.getSummonerByName("고급 참치캔").get();
 
-        String puuid = summonerRepository.save(summoner);
+        String puuid = summonerRepository.save(summoner).getPuuid();
         Summoner foundedSummoner = summonerRepository.findByPuuid(puuid).get();
 
         Assertions.assertThat(foundedSummoner)

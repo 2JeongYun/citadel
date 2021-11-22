@@ -19,6 +19,10 @@ server:
 mail:
   sender: leejeongyun828@gmail.com
 
+citadel:
+  update-period:
+    day: 1
+
 logging.level:
   com: debug
   org.hibernate.SQL: debug
