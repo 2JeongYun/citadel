@@ -1,1 +1,0 @@
-{"id":"G4t3d-nL3amIPAVm8uqyAotV54g54U7NMdY6rQ8WLwZCnw","accountId":"XQMFXb_jHEaLX2KvhQWJjy9atWz29aEJK9Po6xItD8ZE","puuid":"QTP5OsXxt-gzyR6TMC1fTgYR5yptIIHDCCSbMxvTzY8uEN49FVtGPNkWnosf1ITICFFpsdIDXWoA0w","name":"헝 꾸","profileIconId":4653,"revisionDate":1637294568090,"summonerLevel":320}
