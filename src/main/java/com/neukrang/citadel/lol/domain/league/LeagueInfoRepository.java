@@ -8,4 +8,5 @@ public interface LeagueInfoRepository {
 
     Long save(LeagueInfo leagueInfo);
     List<LeagueInfo> findBySummoner(Summoner summoner);
+    void remove(LeagueInfo leagueInfo);
 }
