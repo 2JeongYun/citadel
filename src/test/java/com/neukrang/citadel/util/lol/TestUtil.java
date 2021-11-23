@@ -18,7 +18,7 @@ import java.util.List;
 public class TestUtil {
 
     public static ObjectMapper om = new ObjectMapper().registerModule(new JavaTimeModule());
-    public static final String BASE_PATH = "./src/test/java/com/neukrang/citadel/util/lol/";
+    public static final String BASE_PATH = "./src/test/resources/lol/";
 
     public static final String DEFAULT_SUMMONER = "SummonerHUNGGU.json";
     public static final String DEFAULT_LEAGUE_INFO = "LeagueInfoHUNGGU.json";
