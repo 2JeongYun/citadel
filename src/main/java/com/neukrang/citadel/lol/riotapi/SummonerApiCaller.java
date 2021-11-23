@@ -32,4 +32,16 @@ public class SummonerApiCaller {
             return Optional.empty();
         }
     }
+
+    public Optional<Summoner> getSummonerByPuuid(String puuid) {
+        String url = baseUrl + "/by-puuid/";
+
+        try {
+            Optional<Summoner> summoner =
+                    Optional.ofNullable(riotApiCaller.call(url + puuid, MethodType.GET, Summoner.class));
+            return summoner;
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
 }
