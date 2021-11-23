@@ -6,6 +6,7 @@ import com.neukrang.citadel.lol.domain.QueueType;
 import com.neukrang.citadel.lol.domain.Rank;
 import com.neukrang.citadel.lol.domain.Tier;
 import com.neukrang.citadel.lol.domain.summoner.Summoner;
+import com.neukrang.citadel.util.BaseTimeEntity;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
-public class LeagueInfo {
+public class LeagueInfo extends BaseTimeEntity {
 
     @Id
     @GeneratedValue
@@ -47,5 +48,16 @@ public class LeagueInfo {
 
     public void setSummoner(Summoner summoner) {
         this.summoner = summoner;
+    }
+
+    public LeagueInfo update(LeagueInfo leagueInfo) {
+        this.queueType = leagueInfo.getQueueType();
+        this.tier = leagueInfo.getTier();
+        this.rank = leagueInfo.getRank();
+        this.leaguePoints = leagueInfo.getLeaguePoints();
+        this.wins = leagueInfo.getWins();
+        this.losses = leagueInfo.getLosses();
+
+        return this;
     }
 }

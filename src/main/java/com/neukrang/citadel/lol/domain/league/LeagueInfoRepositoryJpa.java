@@ -29,4 +29,9 @@ public class LeagueInfoRepositoryJpa implements LeagueInfoRepository {
 
         return query.getResultStream().collect(Collectors.toList());
     }
+
+    @Override
+    public void remove(LeagueInfo leagueInfo) {
+        em.remove(leagueInfo);
+    }
 }

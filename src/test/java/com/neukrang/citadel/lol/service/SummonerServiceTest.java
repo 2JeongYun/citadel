@@ -1,41 +1,67 @@
 package com.neukrang.citadel.lol.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.neukrang.citadel.TestUtil;
 import com.neukrang.citadel.lol.domain.summoner.Summoner;
 import com.neukrang.citadel.lol.domain.summoner.SummonerRepository;
 import com.neukrang.citadel.lol.riotapi.SummonerApiCaller;
+import com.neukrang.citadel.util.lol.TestUtil;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+@SpringBootTest
+@TestPropertySource("classpath:application-test.properties")
 class SummonerServiceTest {
 
-    ObjectMapper om = new ObjectMapper();
-    SummonerRepository summonerRepository = mock(SummonerRepository.class);
-    SummonerApiCaller summonerApiCaller = mock(SummonerApiCaller.class);
-    SummonerService summonerService = new SummonerService(summonerRepository, summonerApiCaller);
+    @SpyBean
+    SummonerRepository summonerRepository;
 
-    final String path = "./src/test/java/com/neukrang/citadel/lol/";
+    @MockBean
+    SummonerApiCaller summonerApiCaller;
+
+    @Autowired
+    SummonerService summonerService;
 
     @Test
-    @DisplayName("리포지토리에 소환사 정보가 없을 때 api 호출 및 저장")
-    public void findByName() throws JsonProcessingException {
-        String json = TestUtil.fileToString(path + "SummonerTestJson.txt");
-        Summoner summoner = om.readValue(json, Summoner.class);
-        given(summonerRepository.findByName(summoner.getName())).willReturn(Optional.empty());
-        given(summonerApiCaller.getSummonerByName(summoner.getName())).willReturn(Optional.of(summoner));
+    @Transactional
+    @DisplayName("DB에 없는 유저를 찾을 때 Riot API 호출 및 저장, 반환")
+    void findByName1() {
+        Summoner summoner = TestUtil.getTestSummoner();
+        given(summonerApiCaller.getSummonerByName(summoner.getName()))
+                .willReturn(Optional.of(summoner));
 
-        summonerService.findByName(summoner.getName());
+        Summoner foundSummoner = summonerService.findByName(summoner.getName());
 
-        verify(summonerRepository).findByName(summoner.getName());
         verify(summonerApiCaller).getSummonerByName(summoner.getName());
-        verify(summonerRepository).save(summoner);
+        Assertions.assertThat(summoner)
+                .usingRecursiveComparison()
+                .isEqualTo(foundSummoner);
+    }
+
+    @Test
+    @Transactional
+    @DisplayName("DB에 있는 업데이트가 필요없는 유저를 찾았을 때, Riot API를 호출하지 않음")
+    void findByName2() {
+        Summoner summoner = TestUtil.getTestSummoner();
+        summonerRepository.save(summoner);
+
+        Summoner foundSummoner = summonerService.findByName(summoner.getName());
+
+        verify(summonerApiCaller, times(0))
+                .getSummonerByName(summoner.getName());
+        Assertions.assertThat(summoner)
+                .usingRecursiveComparison()
+                .isEqualTo(foundSummoner);
     }
 }

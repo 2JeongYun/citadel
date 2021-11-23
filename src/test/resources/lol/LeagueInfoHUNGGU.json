@@ -1,0 +1,47 @@
+[
+  {
+    "leagueId": "0313656b-9eca-4a62-8c07-64576339000e",
+    "queueType": "RANKED_SOLO_5x5",
+    "tier": "PLATINUM",
+    "rank": "III",
+    "summonerId": "G4t3d-nL3amIPAVm8uqyAotV54g54U7NMdY6rQ8WLwZCnw",
+    "summonerName": "헝 꾸",
+    "leaguePoints": 0,
+    "wins": 28,
+    "losses": 28,
+    "veteran": false,
+    "inactive": false,
+    "freshBlood": false,
+    "hotStreak": false,
+    "modifiedDate":"2021-11-22T19:26:58.264603600"
+  },
+  {
+    "queueType": "RANKED_TFT_PAIRS",
+    "summonerId": "G4t3d-nL3amIPAVm8uqyAotV54g54U7NMdY6rQ8WLwZCnw",
+    "summonerName": "헝 꾸",
+    "leaguePoints": 0,
+    "wins": 0,
+    "losses": 8,
+    "veteran": false,
+    "inactive": false,
+    "freshBlood": true,
+    "hotStreak": false,
+    "modifiedDate":"2021-11-22T19:26:58.264603600"
+  },
+  {
+    "leagueId": "7d25b67c-6c67-417c-b102-270ffb4948e9",
+    "queueType": "RANKED_FLEX_SR",
+    "tier": "PLATINUM",
+    "rank": "II",
+    "summonerId": "G4t3d-nL3amIPAVm8uqyAotV54g54U7NMdY6rQ8WLwZCnw",
+    "summonerName": "헝 꾸",
+    "leaguePoints": 26,
+    "wins": 53,
+    "losses": 46,
+    "veteran": false,
+    "inactive": false,
+    "freshBlood": false,
+    "hotStreak": false,
+    "modifiedDate":"2021-11-22T19:26:58.264603600"
+  }
+]

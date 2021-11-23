@@ -1,6 +1,8 @@
 package com.neukrang.citadel.lol.riotapi;
 
+import com.neukrang.citadel.config.Config;
 import com.neukrang.citadel.lol.domain.summoner.Summoner;
+import com.neukrang.citadel.util.lol.TestUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
 
-@SpringBootTest
+@SpringBootTest(classes = {Config.class, SummonerApiCaller.class})
 class SummonerApiCallerTest {
 
     @Autowired
@@ -33,5 +35,15 @@ class SummonerApiCallerTest {
         Optional<Summoner> summoner = summonerApiCaller.getSummonerByName(name);
 
         Assertions.assertThat(summoner.isEmpty()).isEqualTo(true);
+    }
+
+    @Test
+    void getSummonerByPuuid() {
+        String puuid = TestUtil.getTestSummoner().getPuuid();
+
+        Optional<Summoner> summoner = summonerApiCaller.getSummonerByPuuid(puuid);
+
+        Assertions.assertThat(summoner).isNotNull();
+        Assertions.assertThat(summoner.get().getPuuid()).isEqualTo(puuid);
     }
 }

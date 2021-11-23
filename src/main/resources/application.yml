@@ -4,7 +4,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     properties:
       hibernate:
         format_sql: true
@@ -18,6 +18,10 @@ server:
 
 mail:
   sender: leejeongyun828@gmail.com
+
+citadel:
+  update-period:
+    day: 1
 
 logging.level:
   com: debug
