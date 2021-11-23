@@ -1,5 +1,6 @@
 package com.neukrang.citadel.lol.riotapi;
 
+import com.neukrang.citadel.config.Config;
 import com.neukrang.citadel.lol.domain.summoner.Summoner;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -9,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
 
-@SpringBootTest
+@SpringBootTest(classes = {Config.class, SummonerApiCaller.class})
 class SummonerApiCallerTest {
 
     @Autowired

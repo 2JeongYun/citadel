@@ -1,17 +1,16 @@
 package com.neukrang.citadel.lol.domain.summoner;
 
-import com.neukrang.citadel.lol.riotapi.SummonerApiCaller;
+import com.neukrang.citadel.util.lol.TestUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
+@TestPropertySource("classpath:application-test.properties")
 class SummonerRepositoryTest {
-
-    @Autowired
-    SummonerApiCaller summonerApiCaller;
 
     @Autowired
     SummonerRepository summonerRepository;
@@ -19,7 +18,7 @@ class SummonerRepositoryTest {
     @Test
     @Transactional
     public void saveSummoner() {
-        Summoner summoner = summonerApiCaller.getSummonerByName("고급 참치캔").get();
+        Summoner summoner = TestUtil.getTestSummoner();
 
         String puuid = summonerRepository.save(summoner).getPuuid();
         Summoner foundedSummoner = summonerRepository.findByPuuid(puuid).get();

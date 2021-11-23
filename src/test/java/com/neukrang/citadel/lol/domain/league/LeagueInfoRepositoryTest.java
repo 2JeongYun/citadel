@@ -1,24 +1,20 @@
 package com.neukrang.citadel.lol.domain.league;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.neukrang.citadel.TestUtil;
 import com.neukrang.citadel.lol.domain.summoner.Summoner;
 import com.neukrang.citadel.lol.domain.summoner.SummonerRepository;
-import com.neukrang.citadel.lol.riotapi.LeagueApiCaller;
+import com.neukrang.citadel.util.lol.TestUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @SpringBootTest
+@TestPropertySource("classpath:application-test.properties")
 class LeagueInfoRepositoryTest {
-
-    @Autowired
-    LeagueApiCaller leagueApiCaller;
 
     @Autowired
     LeagueInfoRepository leagueInfoRepository;
@@ -26,16 +22,13 @@ class LeagueInfoRepositoryTest {
     @Autowired
     SummonerRepository summonerRepository;
 
-    ObjectMapper om = new ObjectMapper();
-
     @Test
     @Transactional
-    public void saveLeagueInfo() throws JsonProcessingException {
-        String json = TestUtil.fileToString("./src/test/java/com/neukrang/citadel/lol/SummonerTestJson.txt");
-        Summoner summoner = om.readValue(json, Summoner.class);
+    public void saveLeagueInfo() {
+        Summoner summoner = TestUtil.getTestSummoner();
         summonerRepository.save(summoner);
 
-        List<LeagueInfo> leagueInfoList = leagueApiCaller.getLeagueInfoList(summoner);
+        List<LeagueInfo> leagueInfoList = TestUtil.getTestLeagueInfo(summoner);
 
         leagueInfoList.stream()
                 .forEach(leagueInfo -> leagueInfoRepository.save(leagueInfo));
