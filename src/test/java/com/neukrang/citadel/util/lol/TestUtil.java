@@ -10,6 +10,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -71,6 +73,19 @@ public class TestUtil {
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(jsonFilePath + "를 찾을 수 없습니다.");
+        }
+    }
+
+    public static <T> T setModifiedDate(T obj, LocalDateTime localDateTime) {
+        try {
+            Field field = obj.getClass().getSuperclass().getDeclaredField("modifiedDate");
+            field.setAccessible(true);
+
+            field.set(obj, localDateTime);
+            return obj;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("수정 시각 바꾸기 실패");
         }
     }
 }
