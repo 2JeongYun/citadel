@@ -20,7 +20,7 @@ import java.util.Map;
 @Component
 public class MatchApiCaller {
 
-    private final ApiCaller riotApiCaller;
+    private final ApiCaller asiaRiotApiCaller;
     private final String baseUrl = "/lol/match/v5/matches/";
     private final MatchIdRequest defaultRequest = MatchIdRequest.builder().build();
 
@@ -33,7 +33,7 @@ public class MatchApiCaller {
         url = ApiCaller.getUrlWithQuery(url, request.getQueries());
 
         String[] idList =
-                riotApiCaller.call(
+                asiaRiotApiCaller.call(
                         url,
                         MethodType.GET,
                         String[].class
