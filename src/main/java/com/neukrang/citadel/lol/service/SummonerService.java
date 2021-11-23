@@ -51,9 +51,9 @@ public class SummonerService {
 
     @Transactional
     public Optional<Summoner> updateSummonerByRiot(Summoner prev) {
-        Optional<Summoner> summoner = summonerApiCaller.getSummonerByName(prev.getName());
+        Optional<Summoner> summoner = summonerApiCaller.getSummonerByPuuid(prev.getPuuid());
         if (summoner.isPresent())
-            summonerRepository.save(summoner.get());
+            prev.update(summoner.get());
         else
             summonerRepository.remove(prev);
         return summoner;
