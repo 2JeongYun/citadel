@@ -27,7 +27,7 @@ public class SummonerService {
             if (summoner.get().needToUpdate(updatePeriod))
                 summoner = updateSummonerByRiot(summoner.get());
         } else {
-            summoner = updateSummonerByRiot(name);
+            summoner = saveSummonerByRiot(name);
         }
 
         return summoner
@@ -35,10 +35,17 @@ public class SummonerService {
     }
 
     @Transactional
-    public Optional<Summoner> updateSummonerByRiot(String name) {
+    public Optional<Summoner> saveSummonerByRiot(String name) {
         Optional<Summoner> summoner = summonerApiCaller.getSummonerByName(name);
-        if (summoner.isPresent())
-            summonerRepository.save(summoner.get());
+        if (summoner.isPresent()) {
+            Optional<Summoner> prev =
+                    summonerRepository.findByPuuid(summoner.get().getPuuid());
+
+            if (prev.isPresent())
+                prev.get().update(summoner.get());
+            else
+                summonerRepository.save(summoner.get());
+        }
         return summoner;
     }
 

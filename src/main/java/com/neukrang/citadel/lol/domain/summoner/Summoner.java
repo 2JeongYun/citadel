@@ -20,4 +20,12 @@ public class Summoner extends BaseTimeEntity {
     private String id;
     private String name;
     private Long summonerLevel;
+
+    public Summoner update(Summoner summoner) {
+        this.id = summoner.getId();
+        this.name = summoner.getName();
+        this.summonerLevel = summoner.getSummonerLevel();
+
+        return this;
+    }
 }

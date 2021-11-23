@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -26,20 +27,36 @@ public class LeagueInfoService {
         List<LeagueInfo> leagueInfoList = leagueInfoRepository.findBySummoner(summoner);
         if (leagueInfoList.size() > 0) {
             if (needToUpdate(leagueInfoList))
-                leagueInfoList = updateLeagueInfoByRiot(summoner);
+                leagueInfoList = updateLeagueInfoByRiot(leagueInfoList, summoner);
 
             return leagueInfoList;
         }
 
-        leagueInfoList = updateLeagueInfoByRiot(summoner);
+        leagueInfoList = saveLeagueInfoByRiot(summoner);
         return leagueInfoList;
     }
 
     @Transactional
-    public List<LeagueInfo> updateLeagueInfoByRiot(Summoner summoner) {
+    public List<LeagueInfo> saveLeagueInfoByRiot(Summoner summoner) {
         List<LeagueInfo> leagueInfoList = leagueApiCaller.getLeagueInfoList(summoner);
         leagueInfoList.stream()
                 .forEach(leagueInfo -> leagueInfoRepository.save(leagueInfo));
+        return leagueInfoList;
+    }
+
+    @Transactional
+    public List<LeagueInfo> updateLeagueInfoByRiot(List<LeagueInfo> leagueInfoList, Summoner summoner) {
+        List<LeagueInfo> freshLeagueInfoList = leagueApiCaller.getLeagueInfoList(summoner);
+        leagueInfoList.stream()
+                .forEach(leagueInfo -> {
+                    Optional<LeagueInfo> updateInfo = freshLeagueInfoList.stream()
+                            .filter(freshInfo -> freshInfo.getQueueType() == leagueInfo.getQueueType())
+                            .findFirst();
+                    if (updateInfo.isPresent())
+                        leagueInfo.update(updateInfo.get());
+                    else
+                        leagueInfoRepository.remove(leagueInfo);
+                });
         return leagueInfoList;
     }
 

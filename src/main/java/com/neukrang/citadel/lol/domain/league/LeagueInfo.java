@@ -49,4 +49,15 @@ public class LeagueInfo extends BaseTimeEntity {
     public void setSummoner(Summoner summoner) {
         this.summoner = summoner;
     }
+
+    public LeagueInfo update(LeagueInfo leagueInfo) {
+        this.queueType = leagueInfo.getQueueType();
+        this.tier = leagueInfo.getTier();
+        this.rank = leagueInfo.getRank();
+        this.leaguePoints = leagueInfo.getLeaguePoints();
+        this.wins = leagueInfo.getWins();
+        this.losses = leagueInfo.getLosses();
+
+        return this;
+    }
 }
