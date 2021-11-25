@@ -16,15 +16,16 @@ import java.util.List;
 @Component
 public class ChampionMasteryApiCaller {
 
-    private final ApiCaller riotApiCaller;
+    private final ApiCaller krRiotApiCaller;
     private final String baseUrl = "/lol/champion-mastery/v4/champion-masteries/by-summoner/";
 
     public List<ChampionMasteryDto> getChampionMasteryList(Summoner summoner) {
         String url = baseUrl + summoner.getId();
 
         ChampionMasteryDto[] championMasteryDtoArr =
-                riotApiCaller.call(url, MethodType.GET, ChampionMasteryDto[].class);
+                krRiotApiCaller.call(url, MethodType.GET, ChampionMasteryDto[].class);
 
         return Arrays.asList(championMasteryDtoArr);
     }
+
 }
