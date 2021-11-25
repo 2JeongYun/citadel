@@ -80,4 +80,19 @@ public class ApiCaller {
     public String call(String url, MethodType type) {
         return call(url, type, new HashMap<>(), (String) null);
     }
+
+    public static String getUrlWithQuery(String url, Map<String, String> queries) {
+        StringBuffer sb = new StringBuffer(url).append('?');
+        queries.entrySet().stream()
+                .forEach(entry -> {
+                    sb.append(entry.getKey())
+                            .append('=')
+                            .append(entry.getValue())
+                            .append('&');
+                });
+
+        if (sb.charAt(sb.length() - 1) == '&')
+            sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
+    }
 }

@@ -18,13 +18,13 @@ import java.util.stream.Collectors;
 @Component
 public class LeagueApiCaller {
 
-    private final ApiCaller riotApiCaller;
+    private final ApiCaller krRiotApiCaller;
     private final String baseUrl = "/lol/league/v4";
 
     public List<LeagueInfo> getLeagueInfoList(Summoner summoner) {
         String url = baseUrl + "/entries/by-summoner/" + summoner.getId();
 
-        LeagueInfo[] leagueInfoArr = riotApiCaller.call(url, MethodType.GET, LeagueInfo[].class);
+        LeagueInfo[] leagueInfoArr = krRiotApiCaller.call(url, MethodType.GET, LeagueInfo[].class);
         List<LeagueInfo> leagueInfoList = Arrays.stream(leagueInfoArr)
                 .filter(leagueInfo -> leagueInfo.getQueueType() != QueueType.UNKNOWN)
                 .collect(Collectors.toList());

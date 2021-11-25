@@ -15,9 +15,16 @@ public class Config {
     private final Environment env;
 
     @Bean
-    public ApiCaller riotApiCaller() {
+    public ApiCaller krRiotApiCaller() {
         String apiKey = env.getProperty("app.riot.api.key");
         String baseUrl = "https://kr.api.riotgames.com";
+        return new ApiCaller(apiKey, baseUrl);
+    }
+
+    @Bean
+    public ApiCaller asiaRiotApiCaller() {
+        String apiKey = env.getProperty("app.riot.api.key");
+        String baseUrl = "https://asia.api.riotgames.com";
         return new ApiCaller(apiKey, baseUrl);
     }
 }
