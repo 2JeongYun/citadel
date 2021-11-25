@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/lol")
+@RequestMapping("/lol/v1")
 @RestController
 public class AnalysisApi {
 
