@@ -1,6 +1,7 @@
 package com.neukrang.citadel.lol.riotapi;
 
 import com.neukrang.citadel.lol.domain.summoner.Summoner;
+import com.neukrang.citadel.lol.riotapi.dto.MatchDto;
 import com.neukrang.citadel.util.ApiCaller;
 import com.neukrang.citadel.util.MethodType;
 import lombok.Builder;
@@ -39,6 +40,13 @@ public class MatchApiCaller {
                         String[].class
                 );
         return Arrays.asList(idList);
+    }
+
+    public MatchDto getMatchDto(String matchId) {
+        String url = baseUrl + matchId;
+        MatchDto matchDto = asiaRiotApiCaller.call(url, MethodType.GET, MatchDto.class);
+
+        return matchDto;
     }
 
     @Builder

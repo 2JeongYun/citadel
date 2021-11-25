@@ -2,6 +2,7 @@ package com.neukrang.citadel.lol.riotapi;
 
 import com.neukrang.citadel.config.Config;
 import com.neukrang.citadel.lol.domain.summoner.Summoner;
+import com.neukrang.citadel.lol.riotapi.dto.MatchDto;
 import com.neukrang.citadel.util.ApiCaller;
 import com.neukrang.citadel.util.lol.TestUtil;
 import org.assertj.core.api.Assertions;
@@ -64,5 +65,13 @@ class MatchApiCallerTest {
         Assertions.assertThat(url.charAt(url.length() - 1)).isNotEqualTo('&');
         Assertions.assertThat(url).contains("count=20");
         Assertions.assertThat(url).contains("start=0");
+    }
+
+    @Test
+    @DisplayName("매치 정보 가져오기")
+    void getMatchDto() {
+        MatchDto matchDto = matchApiCaller.getMatchDto("KR_5560532103");
+
+        System.out.println(matchDto.toString());
     }
 }
