@@ -13,8 +13,8 @@ import java.util.Map;
 public class Converter {
 
     private final DataDragonApiCaller apiCaller;
-    private static Map<String, Integer> championNameMap = new HashMap<>();
-    private static Map<Integer, String> championNumberMap = new HashMap<>();
+    private static Map<String, Long> championNameMap = new HashMap<>();
+    private static Map<Long, String> championNumberMap = new HashMap<>();
 
     @PostConstruct
     public void setUp() {
@@ -29,11 +29,11 @@ public class Converter {
         );
     }
 
-    public static Integer getChampionNumber(String name) {
+    public static Long getChampionNumber(String name) {
         return championNameMap.get(name);
     }
 
-    public static String getChampionName(Integer number) {
+    public static String getChampionName(Long number) {
         return championNumberMap.get(number);
     }
 }

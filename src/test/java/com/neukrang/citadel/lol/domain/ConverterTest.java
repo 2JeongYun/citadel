@@ -11,14 +11,14 @@ class ConverterTest {
     void getChampionNumber() {
         String name = "Gangplank";
 
-        int number = Converter.getChampionNumber(name);
+        Long number = Converter.getChampionNumber(name);
 
         Assertions.assertThat(number).isEqualTo(41);
     }
 
     @Test
     void getChampionName() {
-        int number = 41;
+        Long number = 41L;
 
         String name = Converter.getChampionName(number);
 

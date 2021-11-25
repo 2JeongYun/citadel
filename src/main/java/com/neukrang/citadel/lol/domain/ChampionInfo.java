@@ -15,6 +15,6 @@ public class ChampionInfo {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Champion {
         private String id;
-        private Integer key;
+        private Long key;
     }
 }
