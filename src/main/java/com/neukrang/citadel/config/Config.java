@@ -27,4 +27,11 @@ public class Config {
         String baseUrl = "https://asia.api.riotgames.com";
         return new ApiCaller(apiKey, baseUrl);
     }
+
+    @Bean
+    public ApiCaller ddRiotApiCaller() {
+        String apiKey = env.getProperty("app.riot.api.key");
+        String baseUrl = "https://ddragon.leagueoflegends.com";
+        return new ApiCaller(apiKey, baseUrl);
+    }
 }
