@@ -16,7 +16,7 @@ import java.util.Optional;
 @Component
 public class SummonerApiCaller {
 
-    private final ApiCaller riotApiCaller;
+    private final ApiCaller krRiotApiCaller;
     private final String baseUrl = "/lol/summoner/v4/summoners";
 
     public Optional<Summoner> getSummonerByName(String name) {
@@ -26,7 +26,7 @@ public class SummonerApiCaller {
 
         try {
             Optional<Summoner> summoner =
-                    Optional.ofNullable(riotApiCaller.call(url + name, MethodType.GET, Summoner.class));
+                    Optional.ofNullable(krRiotApiCaller.call(url + name, MethodType.GET, Summoner.class));
             return summoner;
         } catch (Exception e) {
             return Optional.empty();
@@ -38,7 +38,7 @@ public class SummonerApiCaller {
 
         try {
             Optional<Summoner> summoner =
-                    Optional.ofNullable(riotApiCaller.call(url + puuid, MethodType.GET, Summoner.class));
+                    Optional.ofNullable(krRiotApiCaller.call(url + puuid, MethodType.GET, Summoner.class));
             return summoner;
         } catch (Exception e) {
             return Optional.empty();
