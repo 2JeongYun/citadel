@@ -1,6 +1,5 @@
 package com.neukrang.citadel.lol.web.dto;
 
-import com.neukrang.citadel.lol.domain.Tier;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -12,8 +11,8 @@ import java.util.List;
 public class SimpleProfileResponseDto {
 
     private String name;
-    private Tier tier;
-    private int rank;
+    private String tier;
+    private Integer rank;
     private Integer win;
     private Integer lose;
     private String winRate;
