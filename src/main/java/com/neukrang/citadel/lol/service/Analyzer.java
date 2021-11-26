@@ -21,7 +21,7 @@ public class Analyzer {
 
         return SimpleProfileResponseDto.builder()
                 .name(summoner.getName())
-                .tier(highestTier)
+                .tier(highestTier.toString())
                 .rank(getHighestRank(leagueInfoList, highestTier))
                 .winRate(String.format("%.2f", winLoseTotal.winRate))
                 .win(winLoseTotal.winCnt)

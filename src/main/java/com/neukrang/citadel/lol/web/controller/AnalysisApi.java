@@ -19,6 +19,7 @@ public class AnalysisApi {
 
     @GetMapping("/simple-profile/{name}")
     public ApiResponse simpleProfile(@PathVariable String name) {
+        name = name.replaceAll("\\+", " ");
         return ApiResponse.success(analysisService.makeSimpleProfile(name));
     }
 }
